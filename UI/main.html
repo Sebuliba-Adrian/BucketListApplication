@@ -97,7 +97,7 @@ $(document).ready(function(){
 		"serverSide":true,
 		"order":[],
 		"ajax":{
-			url:"fetch.php",
+			url:"fetch.py",
 			type:"POST"
 		},
 		"columnDefs":[
@@ -126,7 +126,7 @@ $(document).ready(function(){
 		if(firstName != '' && lastName != '')
 		{
 			$.ajax({
-				url:"insert.php",
+				url:"",
 				method:'POST',
 				data:new FormData(this),
 				contentType:false,
@@ -149,7 +149,7 @@ $(document).ready(function(){
 	$(document).on('click', '.update', function(){
 		var user_id = $(this).attr("id");
 		$.ajax({
-			url:"fetch_single.php",
+			url:"",
 			method:"POST",
 			data:{user_id:user_id},
 			dataType:"json",
@@ -172,7 +172,7 @@ $(document).ready(function(){
 		if(confirm("Are you sure you want to delete this?"))
 		{
 			$.ajax({
-				url:"delete.php",
+				url:"",
 				method:"POST",
 				data:{user_id:user_id},
 				success:function(data)
