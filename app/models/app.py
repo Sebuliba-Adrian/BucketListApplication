@@ -1,14 +1,12 @@
 from flask import Flask, jsonify, abort, make_response, request
-from models.user import User
-from app import ap
-
 
 NOT_FOUND = 'Not found'
 BAD_REQUEST = 'Bad request'
 
 app = Flask(__name__)
 
-users_datastore = {}
+users = {"adrian": ["adris", "adris123"], "victor": [
+    "vict", "vict123"], "morgan": ["morg", "morg123"]}
 
 goals = [
     {
@@ -27,6 +25,21 @@ goals = [
         'status': 1,
     }
 ]
+
+@app.route('/bucketlist/v1.0', methods=['GET','POST'])
+def register():
+    if request.method=='POST':
+        if request.form['password']==request.form['rpt_password']:
+            registeredusers[request.form['username']]=TheUser(request.form['name'],request.form['username'],request.form['password'])
+            return redirect('/login')
+        else:
+            return 'Passwords dont match'
+    else:
+        return render_template('register.html')
+
+
+
+
 
 
 def _get_goal(id):
@@ -47,61 +60,31 @@ def bad_request(error):
     return make_response(jsonify({'error': BAD_REQUEST}), 400)
 
 
-@app.route('/bucketlist/v1.0/register', methods=['GET', 'POST'])
-def register_user():
-    """A function to register  a user"""
-    if request.method == 'POST':
-        if request.form['password'] == request['repeat_pass']:
-            users_datastore[request.form['username']] = User(
-                request.form['name'], request.form['username'], request.form['password'])
-            return redirect('/login')
-        else:
-            return 'Password missmatch please try again'
-    else:
-
-        return render_template('register.html')
-
-
-@app.route('/bucketlist/v1.0/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        if request.form['username'] in users_datastore:
-            if request.form['password'] == users_datastore[request.form['username']].password:
-                session['active_user'] = request.form['username']
-                return redirect('/lists')
-            else:
-                return redirect('/login')
-        else:
-            return redirect('/register')
-    else:
-        return render_template('login.html')
-
-
-@app.route('/bucketlist/v1.0/goals', methods=['GET'])
+@app.route('/bucketlist/v1.0/goals', methods = ['GET'])
 def get_goals():
     return jsonify({'goals': goals})
 
 
-@app.route('/bucketlist/v1.0/goals/<int:id>', methods=['GET'])
+@app.route('/bucketlist/v1.0/goals/<int:id>', methods = ['GET'])
 def get_goal(id):
-    goal = _get_goal(id)
+    goal=_get_goal(id)
     if not goal:
         abort(404)
     return jsonify({'goals': goal})
 
 
-@app.route('/bucketlist/v1.0/goals', methods=['POST'])
+@app.route('/bucketlist/v1.0/goals', methods = ['POST'])
 def create_goal():
     if not request.json or 'name' not in request.json or 'status' not in request.json:
         abort(400)
-    goal_id = goals[-1].get("id") + 1
-    name = request.json.get('name')
+    goal_id=goals[-1].get("id") + 1
+    name=request.json.get('name')
     if _record_exists(name):
         abort(400)
-    status = request.json.get('status')
+    status=request.json.get('status')
     if type(status) is not int:
         abort(400)
-    goal = {"id": goal_id, "name": name,
+    goal={"id": goal_id, "name": name,
             "status": status}
     goals.append(goal)
     return jsonify({'goal': goal}), 201
