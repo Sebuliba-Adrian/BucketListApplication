@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, abort, make_response, request
+from flask import Flask, jsonify, abort, make_response, request,request, session, g, redirect, url_for, abort,render_template, flash, _app_ctx_stack
+
 from models.user import User
-from app import ap
 
 
 NOT_FOUND = 'Not found'
@@ -54,27 +54,27 @@ def register_user():
         if request.form['password'] == request['repeat_pass']:
             users_datastore[request.form['username']] = User(
                 request.form['name'], request.form['username'], request.form['password'])
-            return redirect('/login')
+            return redirect('/index')
         else:
             return 'Password missmatch please try again'
     else:
 
-        return render_template('register.html')
+        return render_template('registration.html')
 
 
 @app.route('/bucketlist/v1.0/login', methods=['GET', 'POST'])
-def login():
+def login_user():
     if request.method == 'POST':
         if request.form['username'] in users_datastore:
             if request.form['password'] == users_datastore[request.form['username']].password:
                 session['active_user'] = request.form['username']
-                return redirect('/lists')
+                return redirect('/main')
             else:
-                return redirect('/login')
+                return redirect('/index')
         else:
-            return redirect('/register')
+            return redirect('/registeration')
     else:
-        return render_template('login.html')
+        return render_template('index.html')
 
 
 @app.route('/bucketlist/v1.0/goals', methods=['GET'])

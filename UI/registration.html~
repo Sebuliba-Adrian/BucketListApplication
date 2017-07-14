@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
+<<<<<<< HEAD
+    <title>Log In and Registration Form Using Bootstrap</title>
+=======
     <title>Log In and Registration </title>
-
+>>>>>>> code_branch
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -22,14 +23,15 @@
         <div class="row text-center  ">
             <div class="col-md-12">
                 <br /><br />
-
+<<<<<<< HEAD
+                <h2>Admin Registration</h2>
                
-                <h5>Enter your details to get access</h5>
-
+                <h5>( Enter your details to get access )</h5>
+=======
                 <h2>User Registration</h2>
                
                 <h5>Enter your details to start/h5>
-
+>>>>>>> code_branch
                  <br />
             </div>
         </div>
@@ -41,23 +43,27 @@
                         <strong style="color:blue;">  New User ? Enter your detail </strong>  
                             </div>
                             <div class="panel-body">
-                                <form role="form" method = "POST" action = "http://localhost:5000/bucketlist/v1.0/register">
+                                <form role="form">
 <br/>
                                         <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-circle-o-notch"  ></i></span>
-                                            <input type="text" name = "name" class="form-control" placeholder="Enter your Name. . . . ." autofocus="autofocus"/>
+                                            <input type="text" class="form-control" placeholder="Enter your Name. . . . ." autofocus="autofocus"/>
                                         </div>
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-                                            <input type="text" name ="username" class="form-control" placeholder="Enter your User Name. . . . ." />
-                                        
+                                            <input type="text" class="form-control" placeholder="Enter your User Name. . . . ." />
+                                        </div>
+                                         <div class="form-group input-group">
+                                            <span class="input-group-addon">@</span>
+                                            <input type="text" class="form-control" placeholder="Enter your Email. . . . ." />
+                                        </div>
                                       <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                                            <input type="password" name ="password" class="form-control" placeholder="Enter your Password. . . . ." />
+                                            <input type="password" class="form-control" placeholder="Enter your Password. . . . ." />
                                         </div>
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                                            <input type="password" name = "repeat_pass" class="form-control" placeholder="Re-type your password. . . . ." />
+                                            <input type="password" class="form-control" placeholder="Re-type your password. . . . ." />
                                         </div>
                                      
                                      <a href="index.html" class="btn btn-success ">Register Me</a>
