@@ -93,8 +93,7 @@ class TestBucketListApp(unittest.TestCase):
         response = self.app.delete(BAD_goal_URL)
         self.assertEqual(response.status_code, 404)
 
-     def test_registration(self):
-        pass
+   
         
 
     def tearDown(self):
