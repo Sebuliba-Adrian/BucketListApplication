@@ -72,7 +72,7 @@ def login_user():
             else:
                 return redirect('/index')
         else:
-            return redirect('/registeration')
+            return redirect('/registration')
     else:
         return render_template('index.html')
 
