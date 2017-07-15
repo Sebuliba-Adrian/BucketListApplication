@@ -75,7 +75,7 @@ class TestBucketListApp(unittest.TestCase):
 
     def test_update_error(self):
         # cannot edit non-existing goal
-        goal = {"status": 30}
+        goal = {"status": 0}
         response = self.app.put(BAD_goal_URL,
                                 data=json.dumps(goal),
                                 content_type='application/json')

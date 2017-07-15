@@ -47,14 +47,19 @@ def bad_request(error):
     return make_response(jsonify({'error': BAD_REQUEST}), 400)
 
 
-@app.route('/bucketlist/v1.0/register', methods=['GET', 'POST'])
+@app.route('/')
+def index():
+   return render_template('index.html')    
+
+
+@app.route('/registration', methods=['GET', 'POST'])
 def register_user():
     """A function to register  a user"""
     if request.method == 'POST':
         if request.form['password'] == request['repeat_pass']:
             users_datastore[request.form['username']] = User(
                 request.form['name'], request.form['username'], request.form['password'])
-            return redirect('/index')
+            return redirect(url_for('login_user'))
         else:
             return 'Password missmatch please try again'
     else:
@@ -62,7 +67,7 @@ def register_user():
         return render_template('registration.html')
 
 
-@app.route('/bucketlist/v1.0/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login_user():
     if request.method == 'POST':
         if request.form['username'] in users_datastore:
@@ -70,9 +75,9 @@ def login_user():
                 session['active_user'] = request.form['username']
                 return redirect('/main')
             else:
-                return redirect('/index')
+                return redirect(url_for('register_user'))
         else:
-            return redirect('/registration')
+            return redirect(url_for('register_user'))
     else:
         return render_template('index.html')
 
